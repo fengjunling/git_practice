@@ -18,7 +18,7 @@
 
 	git add <file>
 	添加所有文件
-	git add -a 
+	git add --a
 文件修改提交到分支 
 		
 	git commit -m '描述信息'
