@@ -2,7 +2,7 @@
 ## 关联远程仓库
 添加关联远程仓库
 
-	git remote add origin xxx
+	git remote add <origin> xxx
 查看关联远程仓库地址
 
 	git remote -v
@@ -46,7 +46,7 @@
 	创建并切换
 	git checkout -b <name>
 	从远程分支创建并切换
-	git checkout -b <name> origin/<branch-name>
+	git checkout -b <name> origin/<branch>
 	查看全部分支
 	git branch  （分支前有 * 代表当前所在分支）
 	同步远程服务器数据到本地
@@ -60,19 +60,22 @@
 拉取与推送分支
 
 	拉取分支
-	git pull origin <branch-name>
+	git pull <远程主机名> <远程分支>:<本地分支>
+	or
+	git pull <远程主机名> <远程分支名> -->远程分支默认与当前分支合并
 	pull 相当于 fetch + merge 两次操作的合并
 	推送分支
-	git push origin <branch-name>
+	git push <远程主机名> <本地分支>:<远程分支>
 	or
-	git push [远程名] [本地分支]:[远程分支]
+	git push <远程主机名> <本地分支名> -->将本地分支推送与之存在"追踪关系"的远程分支（通常两者同名）若该远程分支不存在，则会被新建
+	
 	删除远程分支
-	git push [远程名] :[远程分支]
+	git push <远程主机名> :<远程分支>
 	跟踪远程分支
-	git branch --set-upstream-to=[远程名]/[远程分支] [本地分支]
+	git branch --set-upstream-to=<远程主机名>/<远程分支> <本地分支>
 	查看本地分支所跟踪的远程分支
 	git branch -vv
-	如果当前分支已设置跟踪分支，pull和push操作后面可省略远程分支
 	
 ## 小结
-如果是在本地初始化仓库，然后与github仓库进行关联，这时本地分支未与远程分支建立联系，需要单独为其建立跟踪分支
+如果是在本地初始化仓库，然后与github仓库进行关联，这时本地分支不会与远程分支建立联系，拉取和推送操作若想要省略主机与分支名，需要为其建立跟踪分支,如果是从远程仓库克隆，本地分支默认与远程主机的同名分支，建立追踪关系，即本地的master分支自动"追踪"origin/master分支，可以直接使用git pull 和git push 操作。<br>
+在本地初始化仓库，关联到Github上新建的仓库，第一次执行git pull origin master 拉取远程分支时，可能会出现fatal:refusing to merge unrelated histories（Git 2.9之后的版本才会出现此问题），在git pull origin master 后面跟上参数 --allow-unrelated-histories 可解决<br>原因参见[Git 2.9 Release Notes](https://github.com/git/git/blob/master/Documentation/RelNotes/2.9.0.txt#L58-L68) 
