@@ -1,11 +1,14 @@
 # <center>git_practice
-##Git命令行操作总结
+## Git命令行操作总结
  文件修改加入暂存区 
 
 	git add <file>
  文件修改提交到分支 
 		
 	git commit -m '描述信息'
+查看修改内容
+		
+	git diff <file>
  版本回退
 		
 	git reset --hard commit_id
